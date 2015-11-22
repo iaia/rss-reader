@@ -1,3 +1,5 @@
+<%= button_to "新規追加", {action: "add"}, data:{confirm: "追加します"}, method: :post, params: {url: @url} %>
+
 <%= @rss.title.content %> <br />
 <%= @rss.links[2].href %> <br />
 
