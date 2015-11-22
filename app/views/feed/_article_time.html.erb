@@ -1,0 +1,11 @@
+<% if (@time_diff / 24.hours).to_i == 0 %>
+    <% if (@time_diff / 60.hours).to_i == 0 %>
+        <% time_str = (@time_diff / 60.minute).to_i.to_s + " hour" %>
+    <% else %>
+        <% time_str = (@time_diff / 60.second).to_i.to_s + " minute" %>
+    <% end %>
+<% else %>
+    <% time_str = (@time_diff / 24.hours).to_i.to_s + " day" %>
+<% end %>
+
+<%= simple_format time_str %>

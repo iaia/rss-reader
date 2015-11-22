@@ -1,14 +1,32 @@
+<link rel="stylesheet" href="/css/feed.css" type="text/css" />
+
 <%= form_tag action: "preview" do %>
     <%= text_field :add_feed, :url %>
     <%= submit_tag "追加" %>
 <% end %>
 
 <% if @articles.present? %>
+    <% now = Time.current %>
     <% @articles.each do |article| %>
-        <%= link_to article.title, article.url %> <br />
-        <%= article.published %> <br />
-        <%== article.content.lines[0] %> <br />
-        <br />
 
+        <div class="article_line">
+            <%= content_tag :div, class: "article_line_site_title" do %>
+                <%= simple_format Site.find(article.site_id).name %>
+            <% end %>
+
+            <%= content_tag :div, class: "article_line_title" do %>
+                <%= link_to article.title, article.url %>
+            <% end %>
+
+            <%= content_tag :div, class: "article_line_content" do %>
+                <%= simple_format article.content.lines[0] %>
+            <% end %>
+
+            <% @time_diff = now - article.published %>
+
+            <%= content_tag :div, class: "article_time" do %>
+                <%= render partial: "article_time" %>
+            <% end %>
+        </div>
     <% end %>
 <% end %>
