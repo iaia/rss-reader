@@ -3,14 +3,12 @@
     <%= submit_tag "追加" %>
 <% end %>
 
-<% @articles.each do |article| %>
-
-    <% article.entries.each do |entry| %>
-        <%= entry.title.content %> <br />
-        <%= entry.links[4].href %> <br />
-        <%= entry.published.content %> <br />
-        <%== entry.content.content.lines[0] %> <br />
+<% if @articles.present? %>
+    <% @articles.each do |article| %>
+        <%= link_to article.title, article.url %> <br />
+        <%= article.published %> <br />
+        <%== article.content.lines[0] %> <br />
         <br />
-    <% end %> 
 
+    <% end %>
 <% end %>

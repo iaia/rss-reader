@@ -3,15 +3,14 @@ class FeedController < ApplicationController
 
     def index
         user = User.find(1)
-        article_ids = []
         user.sites.each do |site|
             feed = Feed::GetFeed.new()
             rss = feed.get_feed(site.feed_url)
             rss.entries.each do |entry|
-                if user.sites.articles.exists?(entry_id: entry.id.content)
+                if site.articles.exists?(entry_id: entry.id.content)
                     next
                 end
-                user.sites.articles.build(
+                article = site.articles.build(
                     title: entry.title.content,
                     entry_id: entry.id.content,
                     url: entry.links[4].href,
@@ -19,17 +18,10 @@ class FeedController < ApplicationController
                     published: entry.published.content,
                     content: entry.content.content
                 )
-                user.sites.articles.save
-                article_ids << user.sites.articles.id
+                article.save
             end
         end
-        p user.sites.articles
-
-        if user.sites.articles.count() != 0
-            @articles = user.sites.articles.where(id: article_ids)
-        else
-            @articles = []
-        end
+        @articles = Article.where(read: false)
     end
 
     def preview
