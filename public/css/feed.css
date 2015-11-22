@@ -25,7 +25,7 @@ div.article_line {
     display:inline;
 }
 .article_line_content p {
-    display:inline;
+    display: inline;
 }
 .article_time p {
     display:inline;
@@ -37,4 +37,12 @@ div.article_line {
     display:inline;
     width: 8em;
     overflow: hidden;
+}
+
+.article_content {
+    clear: both;
+    display: none;
+}
+.article_content p {
+
 }

@@ -1,4 +1,5 @@
 <link rel="stylesheet" href="/css/feed.css" type="text/css" />
+<script type="text/javascript" src="/js/feed.js"></script>
 
 <%= form_tag action: "preview" do %>
     <%= text_field :add_feed, :url %>
@@ -9,7 +10,7 @@
     <% now = Time.current %>
     <% @articles.each do |article| %>
 
-        <div class="article_line">
+        <%= content_tag :div, class: "article_line", id: "article_" + article.id.to_s do %>
             <%= content_tag :div, class: "article_line_site_title" do %>
                 <%= simple_format Site.find(article.site_id).name %>
             <% end %>
@@ -27,6 +28,10 @@
             <%= content_tag :div, class: "article_time" do %>
                 <%= render partial: "article_time" %>
             <% end %>
-        </div>
+
+            <%= content_tag :div, class: "article_content" do %>
+                <%= simple_format article.content %>
+            <% end %>
+        <% end %>
     <% end %>
 <% end %>
