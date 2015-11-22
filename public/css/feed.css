@@ -1,0 +1,40 @@
+div.article_line {
+    list-style:none;
+    clear: both;
+}
+.article_line_site_title {
+    float: left;
+    width: 10em;
+    margin: 2px 5px 2px 5px;
+}
+.article_line_title {
+    float: left;
+    overflow: hidden;
+    margin: 2px 5px 2px 5px;
+}
+.article_line_content {
+    float: left;
+    overflow: hidden;
+    margin: 2px 5px 2px 5px;
+}
+.article_time {
+    float: right;
+    width: 8em;
+}
+.article_line_title p {
+    display:inline;
+}
+.article_line_content p {
+    display:inline;
+}
+.article_time p {
+    display:inline;
+}
+.article_line_site_title {
+    float: left;
+}
+.article_line_site_title p {
+    display:inline;
+    width: 8em;
+    overflow: hidden;
+}
