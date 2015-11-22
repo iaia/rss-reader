@@ -3,14 +3,9 @@
     <%= submit_tag "追加" %>
 <% end %>
 
-<% @rss.each do |rss| %>
+<% @articles.each do |article| %>
 
-    <%= rss.title.content %> <br />
-    <%= rss.links[2].href %> <br />
-
-    <br />
-
-    <% rss.entries.each do |entry| %>
+    <% article.entries.each do |entry| %>
         <%= entry.title.content %> <br />
         <%= entry.links[4].href %> <br />
         <%= entry.published.content %> <br />
