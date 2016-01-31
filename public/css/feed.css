@@ -1,40 +1,108 @@
+html, body {
+    height: 100%;
+}
+.sidebar {
+    width: 200px;
+    height: 100%;
+    float: left;
+    margin: 0 10px 0 10px;
+    overflow: scroll;
+}
+.main {
+    width: 900px;
+    height: 100%;
+    float: left;
+    margin: 0 10px 0 10px;
+    overflow: scroll;
+}
+
+.sites {
+    width: 190px;
+}
+
+.site_title {
+    width: 170px;
+    float: left;
+    overflow: hidden;
+}
+.site_title a {
+    display: inline;
+    text-decoration: none;
+}
+.site_title a:link { color: #000000; }
+.site_title a:visited { color: #000000; }
+.site_title a:hover { color: #000000; }
+.site_title a:active { color: #000000; }
+
+
+
+.site_article_unread_count {
+    width: 10px;
+    float: right;
+}
+.site_article_unread_count p {
+    display: inline;
+}
+
 div.article_line {
-    list-style:none;
+    list-style: none;
     clear: both;
 }
 .article_line_site_title {
     float: left;
     width: 10em;
-    margin: 2px 5px 2px 5px;
+    margin: 0 5px 0 5px;
+}
+.article_line_site_title p {
+    color: #d3d3d3;
+}
+
+.article_line_title_and_content {
+    float: left;
+    width: 30em;
+    overflow: hidden;
 }
 .article_line_title {
     float: left;
     overflow: hidden;
-    margin: 2px 5px 2px 5px;
+    margin: 0 5px 0 5px;
 }
+.article_line_title a {
+    text-decoration: none;
+}
+.article_line_title a:link { color: #000000; }
+.article_line_title a:visited { color: #000000; }
+.article_line_title a:hover { color: #000000; }
+.article_line_title a:active { color: #000000; }
+
 .article_line_content {
     float: left;
-    overflow: hidden;
-    margin: 2px 5px 2px 5px;
+    margin: 0 5px 0 5px;
+}
+.article_line_content p {
+    color: #808080;
 }
 .article_time {
     float: right;
     width: 8em;
 }
+.article_time p {
+    color: #708090;
+}
 .article_line_title p {
-    display:inline;
+    display: inline;
 }
 .article_line_content p {
     display: inline;
 }
 .article_time p {
-    display:inline;
+    display: inline;
 }
 .article_line_site_title {
     float: left;
 }
 .article_line_site_title p {
-    display:inline;
+    display: inline;
     width: 8em;
     overflow: hidden;
 }
@@ -44,5 +112,5 @@ div.article_line {
     display: none;
 }
 .article_content p {
-
 }
+

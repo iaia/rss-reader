@@ -1,25 +1,11 @@
 class FeedController < ApplicationController
     include Feed
+    before_action :auth
 
     def index
-        user = User.find(1)
-        user.sites.each do |site|
-            feed = Feed::GetFeed.new()
-            rss = feed.get_feed(site.feed_url)
-            rss.entries.each do |entry|
-                if site.articles.exists?(entry_id: entry.id.content)
-                    next
-                end
-                article = site.articles.build(
-                    title: entry.title.content,
-                    entry_id: entry.id.content,
-                    url: entry.links[4].href,
-                    feed_url: entry.links[2].href,
-                    published: entry.published.content,
-                    content: entry.content.content
-                )
-                article.save
-            end
+        @sites = @user.sites
+        @sites.each do |site|
+            Article.update_site_articles(site)
         end
         @articles = Article.where(read: false)
     end
@@ -27,17 +13,25 @@ class FeedController < ApplicationController
     def preview
         @url = params[:add_feed][:url]
         feed = Feed::GetFeed.new()
-        @rss = feed.get_feed(@url)
+        @site = feed.get_feed(@url)
+        @articles = Article.preview(@url)
     end
 
     def add
-        url = params[:url]
-        feed = Feed::GetFeed.new()
-        rss = feed.get_feed(url)
+        Site.add(user, params[:url])
 
-        user = User.find(1)
-        site = user.sites.build(name: rss.title.content, url: rss.links[2].href, feed_url: rss.links[0].href)
-        site.save
         redirect_to action: "index"
+    end
+
+    def site
+        @sites = @user.sites
+        @site = @user.sites.find(params[:id])
+        @articles = Article.where(read: false)
+
+        render action: "index"
+    end
+
+    def auth
+        @user = User.find(1)
     end
 end

@@ -3,4 +3,7 @@ Rails.application.routes.draw do
     get 'feed/show' => "feed#show"
     post 'feed/preview' => "feed#preview"
     post 'feed/add' => "feed#add"
+    
+    get 'feed/site' => "feed#site"
+    get 'feed/site/:id' => "feed#site"
 end

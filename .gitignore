@@ -1,0 +1,6 @@
+log/
+tmp/
+
+*.swp
+
+db/development.sqlite3
