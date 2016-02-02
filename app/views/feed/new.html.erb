@@ -1,4 +1,16 @@
 <link rel="stylesheet" href="/css/feed.css" type="text/css" />
+<link rel="stylesheet" href="/css/add_feed.css" type="text/css" />
 <script type="text/javascript" src="/js/feed.js"></script>
 
-<%= render "sidebar" %>
+<div class="container">
+    <%= render "sidebar" %>
+    <div class="main">
+        <div class="new_content">
+            <p>New URL</p>
+            <%= form_tag action: "preview", class: "add_feed_form" do %>
+                <%= text_field :add_feed, :url, class: "feed_url" %>
+                <%= submit_tag "add", class: "add_feed" %>
+            <% end %>
+        </div>
+    </div>
+</div>

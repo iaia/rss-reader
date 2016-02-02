@@ -1,0 +1,20 @@
+.new_content {
+    margin: auto;
+}
+
+.add_feed_form {
+}
+
+.feed_url {
+    width: 500px;
+    padding: 10px;
+    font-size: 1.3em;
+}
+
+input.add_feed {
+    padding: 10px;
+    font-size: 1.3em;
+    background-color: #0204a8;
+    color: #ffffff;
+    border-style: none;
+}
