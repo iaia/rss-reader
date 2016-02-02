@@ -4,7 +4,7 @@
     </div>
     <div class="sites">
         <%= content_tag :div, class: "site_title" do %>
-            <%= link_to "All", action: "index" %>
+            <%= link_to "All", {action: "index"}, class: "site_title_link" %>
         <% end %>
         <%= content_tag :div, class: "site_article_unread_count" do %>
             <%= simple_format @articles.where(read: false).count.to_s %>
