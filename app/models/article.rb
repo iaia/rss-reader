@@ -2,8 +2,19 @@ class Article < ActiveRecord::Base
     belongs_to :site
 
     def self.preview(feed_url)
+        if feed_url.blank?
+            return 
+        end
+        rss = Feed.get_feed(feed_url)
         articles = []
-        if rss.class.to_s == "RSS::Rss" and rss.rss_version == "2.0"
+        rss_class = rss.class.to_s 
+        p rss_class
+        if rss_class == "RSS::Atom::Feed"
+            rss_version = ""
+        else
+            rss_version = rss.rss_version
+        end
+        if rss_class == "RSS::Rss" and rss_version == "2.0"
             rss.items.each do |entry|
                 article = Article.create(
                     title: entry.title.to_s,
@@ -15,8 +26,15 @@ class Article < ActiveRecord::Base
                 )
                 articles << article
             end
-        elsif rss.class.to_s == "RSS::Atom::Feed"
+        elsif rss_class == "RSS::Atom::Feed"
             rss.entries.each do |entry|
+                p entry.title.content
+                p entry.id.content
+                p entry.links[4].href
+                p entry.links[2].href
+                p entry.published.content
+                p entry.content.content
+
                 article = Article.create(
                     title: entry.title.content,
                     entry_id: entry.id.content,
@@ -27,7 +45,7 @@ class Article < ActiveRecord::Base
                 )
                 articles << article
             end
-        elsif rss.class.to_s == "RSS::RDF" and rss.rss_version == "1.0"
+        elsif rss_class == "RSS::RDF" and rss_version == "1.0"
             rss.channel.each do |entry|
                 article = site.articles.build(
                     title: entry.title.to_s,
@@ -43,8 +61,7 @@ class Article < ActiveRecord::Base
         return articles
     end
     def self.update_site_articles(site)
-        feed = Feed::GetFeed.new()
-        rss = feed.get_feed(site.feed_url)
+        rss = Feed.get_feed(site.feed_url)
         if rss.class.to_s == "RSS::Rss" and rss.rss_version == "2.0"
             rss.channel.each do |entry|
                 if site.articles.exists?(entry_id: entry.id.content)

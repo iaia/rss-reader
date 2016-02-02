@@ -3,13 +3,11 @@
 require 'rss'
 
 module Feed
-    class GetFeed
-        def initialize
-        end
+    class << self
         def get_feed(url)
-            return RSS::Parser.parse(url, true)
+            return RSS::Parser.parse(url, false)
         end
- 
+
         def show_feed(rss)
             if rss.class.to_s == "RSS::Rss" and rss.rss_version == "2.0"
                 channel = rss.channel
@@ -24,7 +22,7 @@ module Feed
                     p item.pubDate.to_s
                     p item.content_encoded.to_s
                 end
-           elsif rss.class.to_s == "RSS::RDF" and rss.rss_version == "1.0"
+            elsif rss.class.to_s == "RSS::RDF" and rss.rss_version == "1.0"
                 channel = rss.channel
                 p channel.title.to_s
                 p channel.about.to_s # feed_url
@@ -50,15 +48,13 @@ module Feed
                     p entry.content.content
                 end
             end
- 
         end
     end
 end
 
-#feed = Feed::GetFeed.new()
 #url = "http://iaiaie.blogspot.com/feeds/posts/default" # atom
 #url = "http://blog.livedoor.jp/nicovip2ch/atom.xml" # 壊れたatom
 #url = "http://ie.u-ryukyu.ac.jp/news-ie/feed/" # rss2.0
 #url = "http://feeds.feedburner.com/mactegaki?format=xml" # RDF1.0
-#rss = feed.get_feed(url)
+#rss = Feed.get_feed(url)
 #feed.show_feed(rss)

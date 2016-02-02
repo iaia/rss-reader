@@ -3,8 +3,7 @@ class Site < ActiveRecord::Base
     belongs_to :user
 
     def self.add(user, url)
-        feed = Feed::GetFeed.new()
-        rss = feed.get_feed(url)
+        rss = Feed.get_feed(url)
 
         if rss.class.to_s == "RSS::Rss" and rss.rss_version == "2.0"
             channel = rss.channel
