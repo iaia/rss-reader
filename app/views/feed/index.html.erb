@@ -1,31 +1,7 @@
 <link rel="stylesheet" href="/css/feed.css" type="text/css" />
 <script type="text/javascript" src="/js/feed.js"></script>
 
-<div class="sidebar">
-    <%= form_tag action: "preview" do %>
-        <%= text_field :add_feed, :url %>
-        <%= submit_tag "追加" %>
-    <% end %>
-    <div class="sites">
-        <%= content_tag :div, class: "site_title" do %>
-            <%= link_to "All", action: "index" %>
-        <% end %>
-        <%= content_tag :div, class: "site_article_unread_count" do %>
-            <%= simple_format @articles.where(read: false).count.to_s %>
-        <% end %>
-    </div>
-
-    <% @sites.each do |site| %>
-        <div class="sites">
-            <%= content_tag :div, class: "site_title" do %>
-                <%= link_to site.name, action: "site", id: site.id %>
-            <% end %>
-            <%= content_tag :div, class: "site_article_unread_count" do %>
-                <%= simple_format site.articles.where(read: false).count.to_s %>
-            <% end %>
-        </div>
-    <% end %>
-</div>
+<%= render "sidebar" %>
 
 <div class="main">
     <% if @articles.present? %>

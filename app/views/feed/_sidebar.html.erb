@@ -1,0 +1,26 @@
+<div class="sidebar">
+    <div>
+        <%= link_to "Add Site", action: "new" %>
+    </div>
+    <div class="sites">
+        <%= content_tag :div, class: "site_title" do %>
+            <%= link_to "All", action: "index" %>
+        <% end %>
+        <%= content_tag :div, class: "site_article_unread_count" do %>
+            <%= simple_format @articles.where(read: false).count.to_s %>
+        <% end %>
+    </div>
+
+    <% @sites.each do |site| %>
+        <div class="sites">
+            <%= content_tag :div, class: "site_title" do %>
+                <%= link_to site.name, action: "site", id: site.id %>
+            <% end %>
+            <%= content_tag :div, class: "site_article_unread_count" do %>
+                <%= simple_format site.articles.where(read: false).count.to_s %>
+            <% end %>
+        </div>
+    <% end %>
+</div>
+
+

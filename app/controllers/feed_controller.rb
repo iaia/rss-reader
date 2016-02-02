@@ -10,6 +10,15 @@ class FeedController < ApplicationController
         @articles = Article.where(read: false)
     end
 
+    def new
+        @sites = @user.sites
+        @sites.each do |site|
+            Article.update_site_articles(site)
+        end
+        @articles = Article.where(read: false)
+ 
+    end
+
     def preview
         @url = params[:add_feed][:url]
         feed = Feed::GetFeed.new()
@@ -19,7 +28,6 @@ class FeedController < ApplicationController
 
     def add
         Site.add(user, params[:url])
-
         redirect_to action: "index"
     end
 
