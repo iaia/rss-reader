@@ -17,7 +17,7 @@ html, body {
 
 .main {
     margin-left: 250px;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .sites {
@@ -47,14 +47,12 @@ html, body {
     display: inline;
 }
 
-div.article_line {
-    height: 20px;
+.article_line {
     width: auto;
     padding: 5px 0;
     list-style: none;
     clear: both;
     border-top: solid 1px #f0f0f0;
-    overflow: hidden;
 }
 .article_line_site_title {
     float: left;
