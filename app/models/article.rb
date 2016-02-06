@@ -9,7 +9,7 @@ class Article < ActiveRecord::Base
         site_info, entries = Feed.read(rss)
         articles = Array.new
         entries.each do |entry|
-            article = Article.create(
+            article = Article.new(
                 title: entry["title"],
                 url: entry["url"],
                 published: entry["published_time"],
@@ -19,19 +19,5 @@ class Article < ActiveRecord::Base
             articles << article
         end
         return articles
-    end
-    def self.update_site_articles(site)
-        rss = Feed.get(feed_url)
-        site_info, entries = Feed.read(rss)
-        entries.each do |entry|
-            article = Article.create(
-                title: entry["title"],
-                url: entry["url"],
-                published: entry["published_time"],
-                description: entry["description"],
-                content: entry["content"]
-            )
-            article.save
-        end
     end
 end

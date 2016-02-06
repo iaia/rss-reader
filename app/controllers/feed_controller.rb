@@ -10,17 +10,18 @@ class FeedController < ApplicationController
 
     def preview
         @url = params[:add_feed][:url]
-        @site = Feed.get_feed(@url)
-        @articles = Article.preview(@url)
+        @tmp_site = Site.preview(@url)
+        @tmp_articles = Article.preview(@url)
     end
 
     def add
-        Site.add(user, params[:url])
+        Site.add(@user, params[:url])
         redirect_to action: "index"
     end
 
     def site
         @site = @sites.find(params[:id])
+        @articles = @site.articles.where(read: false)
         render action: "index"
     end
 
@@ -31,9 +32,9 @@ class FeedController < ApplicationController
     def update
         @sites = @user.sites
         @sites.each do |site|
-            #Article.update_site_articles(site)
+            site.update_site_articles()
         end
         @articles = Article.where(read: false)
+        @all_articles_count = @articles.count.to_s
     end
- 
 end

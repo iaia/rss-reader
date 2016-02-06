@@ -7,7 +7,7 @@
             <%= link_to "All", {action: "index"}, class: "site_title_link" %>
         <% end %>
         <%= content_tag :div, class: "site_article_unread_count" do %>
-            <%= simple_format @articles.where(read: false).count.to_s %>
+            <%= simple_format @all_articles_count %>
         <% end %>
     </div>
 

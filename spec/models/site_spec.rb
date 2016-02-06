@@ -19,4 +19,29 @@ RSpec.describe Site, type: :model do
             end
         end
     end
+
+    describe "update_site_articles method" do
+        before(:each) do 
+            @user = User.create(name: "iaia", password: "iaia")
+            @url = "http://blog.livedoor.jp/nicovip2ch/atom.xml" # 壊れたatom
+            Site.add(@user, @url)
+            @sites = @user.sites
+        end
+        context "site update" do
+            it "1度だけ" do 
+                @sites.each do |site|
+                    site.update_site_articles()
+                end
+            end
+            it "同じものが入るとき" do 
+                @sites.each do |site|
+                    site.update_site_articles()
+                end
+                @sites.each do |site|
+                    site.update_site_articles()
+                end
+            end
+ 
+        end
+    end
 end
