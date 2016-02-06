@@ -27,11 +27,12 @@ module Feed
                     entries.push(entry)
                 end
             elsif rss.class.to_s == "RSS::RDF" and rss.rss_version == "1.0"
+                p rss
                 channel = rss.channel
                 site["version"] = rss.rss_version
                 site["title"] = channel.title.to_s
                 site["site_url"] = channel.link.to_s
-                channel.items.each do |item|
+                rss.items.each do |item|
                     entry = Hash.new
                     entry["title"] = item.title.to_s
                     entry["url"] = item.link.to_s
@@ -111,6 +112,8 @@ end
 #url = "http://iaiaie.blogspot.com/feeds/posts/default" # atom atom11
 #url = "http://blog.livedoor.jp/nicovip2ch/atom.xml" # 壊れたatom atom10
 #url = "http://ie.u-ryukyu.ac.jp/news-ie/feed/" # rss2.0 rss20
-#url = "http://feeds.feedburner.com/mactegaki?format=xml" # RDF1.0
-#rss = Feed.get(url)
-#Feed.read(rss)
+url = "http://feeds.feedburner.com/mactegaki?format=xml" # RDF1.0
+rss = Feed.get(url)
+site_info, entries = Feed.read(rss)
+p site_info
+p entries
