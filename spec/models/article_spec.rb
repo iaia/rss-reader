@@ -9,7 +9,10 @@ RSpec.describe Article, type: :model do
         end
         context "壊れたatom case." do
             it "not nil" do 
-                Article.preview(@url).should_not be_nil
+                p @url
+                articles = Article.preview(@url).should_not be_nil
+                p articles
+
             end
         end
     end

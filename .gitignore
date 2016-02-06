@@ -4,3 +4,4 @@ tmp/
 *.swp
 
 db/development.sqlite3
+db/test.sqlite3

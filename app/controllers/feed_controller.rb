@@ -20,9 +20,7 @@ class FeedController < ApplicationController
     end
 
     def site
-        @sites = @user.sites
-        @site = @user.sites.find(params[:id])
-
+        @site = @sites.find(params[:id])
         render action: "index"
     end
 

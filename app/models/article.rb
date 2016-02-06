@@ -7,7 +7,7 @@ class Article < ActiveRecord::Base
         end
         rss = Feed.get(feed_url)
         site_info, entries = Feed.read(rss)
-        p entries
+        articles = Array.new
         entries.each do |entry|
             article = Article.create(
                 title: entry["title"],
