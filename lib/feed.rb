@@ -112,8 +112,6 @@ end
 #url = "http://iaiaie.blogspot.com/feeds/posts/default" # atom atom11
 #url = "http://blog.livedoor.jp/nicovip2ch/atom.xml" # 壊れたatom atom10
 #url = "http://ie.u-ryukyu.ac.jp/news-ie/feed/" # rss2.0 rss20
-url = "http://feeds.feedburner.com/mactegaki?format=xml" # RDF1.0
-rss = Feed.get(url)
-site_info, entries = Feed.read(rss)
-p site_info
-p entries
+#url = "http://feeds.feedburner.com/mactegaki?format=xml" # RDF1.0
+#rss = Feed.get(url)
+#site_info, entries = Feed.read(rss)
