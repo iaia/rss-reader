@@ -1,9 +1,12 @@
+.bundle
+
+db/*.sqlite3
+
 log/
 tmp/
 
 *.swp
 
-db/development.sqlite3
-db/test.sqlite3
-.bundle
-vender/
+.DS_Store
+
+vender
