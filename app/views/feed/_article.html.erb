@@ -1,0 +1,41 @@
+<% if @articles.present? %>
+    <% now = Time.current %>
+    <% @articles.each do |article| %>
+        <div class="article">
+
+            <%= content_tag :div, class: "article_line", id: "article_" + article.id.to_s do %>
+                <%= content_tag :div, class: "article_line_site_title" do %>
+                    <% if @site.present? %>
+                        <%= simple_format @site.name %>
+                    <% else %>
+                        <%= simple_format Site.where(id: article.site_id)[0].name %>
+                    <% end %>
+                <% end %>
+
+                <div class="article_line_title_and_content">
+                    <% str_limit = 28 %>
+
+                    <%= content_tag :div, class: "article_line_title" do %>
+                        <%= link_to article.title, article.url, target: ["_blank"] %>
+                        <% str_limit -= article.title.length %>
+                    <% end %>
+
+                    <%= content_tag :div, class: "article_line_content" do %>
+                        <%= simple_format (article.content.lines[0])[0, str_limit] %>
+                    <% end %>
+                </div>
+
+                <% @time_diff = now - article.published %>
+
+                <%= content_tag :div, class: "article_time" do %>
+                    <%= render partial: "article_time" %>
+                <% end %>
+
+            <% end %>
+
+            <%= content_tag :div, class: "article_content" do %>
+                <%= simple_format EntryReformat.reformat(article.content) %>
+            <% end %>
+        </div>
+    <% end %>
+<% end %>

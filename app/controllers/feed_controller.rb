@@ -10,8 +10,8 @@ class FeedController < ApplicationController
 
     def preview
         @url = params[:add_feed][:url]
-        @tmp_site = Site.preview(@url)
-        @tmp_articles = Article.preview(@url)
+        @site = Site.preview(@url)
+        @articles = Article.preview(@url)
     end
 
     def add
