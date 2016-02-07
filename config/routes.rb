@@ -7,4 +7,7 @@ Rails.application.routes.draw do
     get 'feed/site' => "feed#site"
     get 'feed/site/:id' => "feed#site"
     get 'feed/new' => "feed#new"
+
+    get 'setting/setting' => "settings#setting"
+    get 'setting/import_opml' => "settings#import_opml"
 end

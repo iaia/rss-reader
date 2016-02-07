@@ -1,10 +1,10 @@
 <div class="sidebar">
     <div>
-        <%= link_to "Add Site", action: "new" %>
+        <%= link_to "Add Site", controller: "feed", action: "new" %>
     </div>
     <div class="sites">
         <%= content_tag :div, class: "site_title" do %>
-            <%= link_to "All", {action: "index"}, class: "site_title_link" %>
+            <%= link_to "All", {controller: "feed", action: "index"}, class: "site_title_link" %>
         <% end %>
         <%= content_tag :div, class: "site_article_unread_count" do %>
             <%= simple_format @all_articles_count %>
@@ -14,13 +14,17 @@
     <% @sites.each do |site| %>
         <div class="sites">
             <%= content_tag :div, class: "site_title" do %>
-                <%= link_to site.name, action: "site", id: site.id %>
+                <%= link_to site.name, controller: "feed", action: "site", id: site.id %>
             <% end %>
             <%= content_tag :div, class: "site_article_unread_count" do %>
                 <%= simple_format site.articles.where(read: false).count.to_s %>
             <% end %>
         </div>
     <% end %>
+
+    <div class="sidebar_setting">
+        <%= link_to "settings", controller: "settings" , action: "setting" %>
+    </div>
 </div>
 
 
