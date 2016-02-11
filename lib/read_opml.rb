@@ -3,6 +3,7 @@ require 'oga'
 
 module ReadOpml
     class Reader
+        attr_reader :category
         def initialize(xml)
             @xml = xml
         end
@@ -13,16 +14,35 @@ module ReadOpml
             return @category
         end
         def read_node(node)
+            @category["uncategorized"] = []
             node.children.each do |n|
                 class_name = n.class
                 if class_name == Oga::XML::Element
                     category_name = ""
+                    attr_text = ""
+                    attr_type = ""
+                    attr_title = ""
+                    attr_xml_url = ""
                     n.attributes.each do |attr|
                         if attr.name == "text"
-                            # valueを取り出してhashに空の配列入れる
-                            category_name = attr.value
-                            @category[category_name] = get_site(n)
+                            attr_text = attr.value
+                        elsif attr.name == "title"
+                            attr_title = attr.value
+                        elsif attr.name == "type"
+                            attr_type = attr.value
+                        elsif attr.name == "xmlUrl"
+                            attr_xml_url = attr.value
                         end
+                    end
+                    if attr_type == "rss" and attr_xml_url != ""
+                        # uncategorized
+                        category_name = "uncategorized"
+                        @category[category_name].push(attr_xml_url)
+                    elsif attr_text != "" and attr_title != "" 
+                        # categorized
+                        # valueを取り出してhashに空の配列入れる
+                        category_name = attr_title
+                        @category[category_name] = get_site(n)
                     end
                     if category_name == ""
                         read_node(n)
@@ -56,8 +76,13 @@ module ReadOpml
     end
 end
 
-
 #xml = File.open("feedly.opml", &:read)
 #reader = ReadOpml::Reader.new(xml)
-#reader.read
-
+#categories = reader.read
+#categories.each_pair do |category, sites|
+#    p category
+#    sites.each do |site|
+#        p site
+#    end
+#    p ""
+#end
