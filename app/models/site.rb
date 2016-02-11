@@ -1,6 +1,7 @@
 class Site < ActiveRecord::Base
     has_many :articles
     belongs_to :user
+    belongs_to :collection
 
     def self.add(user, url)
         rss = Feed.get(url)
