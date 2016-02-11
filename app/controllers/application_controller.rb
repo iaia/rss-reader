@@ -1,5 +1,17 @@
 class ApplicationController < ActionController::Base
-  # Prevent CSRF attacks by raising an exception.
-  # For APIs, you may want to use :null_session instead.
-  protect_from_forgery with: :exception
+    protect_from_forgery with: :exception
+
+    def auth
+        @user = User.find(1)
+        @sites = @user.sites
+    end
+
+    def update_articles
+        @sites.each do |site|
+            #site.update_site_articles()
+        end
+        @articles = Article.where(read: false).order(published: :desc)
+        @all_articles_count = @articles.count.to_s
+    end
 end
+
