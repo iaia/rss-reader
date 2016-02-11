@@ -23,6 +23,7 @@ module ReadOpml
                     attr_type = ""
                     attr_title = ""
                     attr_xml_url = ""
+                    attr_html_url = ""
                     n.attributes.each do |attr|
                         if attr.name == "text"
                             attr_text = attr.value
@@ -32,12 +33,18 @@ module ReadOpml
                             attr_type = attr.value
                         elsif attr.name == "xmlUrl"
                             attr_xml_url = attr.value
+                        elsif attr.name == "htmlUrl"
+                            attr_html_url = attr.value
                         end
                     end
                     if attr_type == "rss" and attr_xml_url != ""
                         # uncategorized
                         category_name = "uncategorized"
-                        @category[category_name].push(attr_xml_url)
+                        site = Hash.new
+                        site["title"] = attr_title
+                        site["html_url"] = attr_html_url
+                        site["xml_url"] = attr_xml_url
+                        @category[category_name].push(site)
                     elsif attr_text != "" and attr_title != "" 
                         # categorized
                         # valueを取り出してhashに空の配列入れる
@@ -52,7 +59,7 @@ module ReadOpml
             end
         end
         def get_site(node)
-            urls = []
+            sites = []
 
             if node.children.length == 0
                 node.attributes.each do |attr|
@@ -63,15 +70,23 @@ module ReadOpml
             end
             node.children.each do |n|
                 if n.class == Oga::XML::Element
+                    site = Hash.new
                     n.attributes.each do |attr|
                         if attr.name == "xmlUrl"
                             # 親要素を取り出して、そのvalueの名前になっている配列に追加
-                            urls.push(attr.value)
+                            site["xml_url"] = attr.value
+                        elsif attr.name == "htmlUrl"
+                            site["html_url"] = attr.value
+                        elsif attr.name == "title"
+                            site["title"] = attr.value
                         end
+                    end
+                    if site["xml_url"] != ""
+                        sites.push(site)
                     end
                 end
             end
-            return urls
+            return sites
         end
     end
 end
@@ -82,7 +97,7 @@ end
 #categories.each_pair do |category, sites|
 #    p category
 #    sites.each do |site|
-#        p site
+#        p "site_title: " + site["title"] + ", html_url:" + site["html_url"] + ", xml_url" + site["xml_url"]
 #    end
 #    p ""
 #end
