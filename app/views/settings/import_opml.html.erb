@@ -5,7 +5,9 @@
 <div class="container">
     <%= render template: "feed/_sidebar" %>
     <div class="main">
-        ファイル選択 ファイル送信ボタン<br />
-        formで作ってボタン押されたらプレビュー画面へ
+        <%= form_tag({action: :preview_opml}, multipart: true) do %>
+            <%= file_field :opml, :file_name, class: "file_selector_button" %>
+            <%= submit_tag "upload", method: :post, class: "submit_button" %>
+        <% end %>
     </div>
 </div>

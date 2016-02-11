@@ -1,0 +1,20 @@
+<link rel="stylesheet" href="/css/feed.css" type="text/css" />
+<link rel="stylesheet" href="/css/article_content.css" type="text/css" />
+<script type="text/javascript" src="/js/feed.js"></script>
+
+<div class="container">
+    <%= render template: "feed/_sidebar" %>
+    <div class="main">
+        以下のカテゴリでサイトを追加登録する場合はボタンを押してください<br />
+        <%= button_to "追加登録", {action: "regist_opml"}, data:{confirm: "本当に追加登録しますか?"}, method: :post, params: {url: @url} %>
+        <% @collections.each do |collection| %>
+            <%= collection.name %><br />
+            <% @sites.each do |site| %>
+                <% if site.collection_id == collection.id > 0 %>
+                    <%= link_to site.name, site.url %>(feed_url: <%= site.feed_url %>)<br />
+                <% end %>
+            <% end %>
+            <br />
+        <% end %>
+    </div>
+</div>
