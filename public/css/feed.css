@@ -10,41 +10,9 @@ html, body {
     text-align: left;
 }
 
-.sidebar {
-    width: 200px;
-    float: left;
-}
-
 .main {
     margin-left: 250px;
     overflow: scroll;
-}
-
-.sites {
-    width: 190px;
-}
-
-.site_title {
-    width: 170px;
-    float: left;
-    overflow: hidden;
-}
-.site_title a {
-    display: inline;
-    text-decoration: none;
-}
-.site_title a:link { color: #858585; }
-.site_title a:visited { color: #858585; }
-.site_title a:hover { color: #858585; }
-.site_title a:active { color: #858585; }
-
-
-.site_article_unread_count {
-    width: 10px;
-    float: right;
-}
-.site_article_unread_count p {
-    display: inline;
 }
 
 .article_line {

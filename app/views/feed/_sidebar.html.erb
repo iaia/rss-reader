@@ -1,30 +1,50 @@
 <div class="sidebar">
-    <div>
-        <%= link_to "Add Site", controller: "feed", action: "new" %>
-    </div>
-    <div class="sites">
-        <%= content_tag :div, class: "site_title" do %>
-            <%= link_to "All", {controller: "feed", action: "index"}, class: "site_title_link" %>
-        <% end %>
-        <%= content_tag :div, class: "site_article_unread_count" do %>
-            <%= simple_format @all_articles_count %>
-        <% end %>
-    </div>
-
-    <% @sites.each do |site| %>
-        <div class="sites">
+    <ul class="sidebar_list">
+        <li>
+            <div>
+                <%= link_to "Add Site", controller: "feed", action: "new" %>
+            </div>
+        </li>
+        <li class="site">
             <%= content_tag :div, class: "site_title" do %>
-                <%= link_to site.name, controller: "feed", action: "site", id: site.id %>
+                <%= link_to "All", {controller: "feed", action: "index"}, class: "site_title_link" %>
             <% end %>
             <%= content_tag :div, class: "site_article_unread_count" do %>
-                <%= simple_format site.articles.where(read: false).count.to_s %>
+                <%= simple_format @all_articles_count %>
             <% end %>
-        </div>
-    <% end %>
+        </li>
 
-    <div class="sidebar_setting">
-        <%= link_to "settings", controller: "settings" , action: "setting" %>
-    </div>
+        <% @collections.each do |collection| %>
+            <li>
+                <div class="collection">
+                    <%= content_tag :div, class: "collection_name" do %>
+                        <%= collection.name %>
+                    <% end %>
+                    <%= content_tag :div, class: "collection_unread_count" do %>
+                        <%= simple_format collection.unread_num.to_s %>
+                    <% end %>
+                </div>
+                <ul class="sites">
+                    <% collection.sites.each do |site| %>
+                        <li class="site">
+                            <%= content_tag :div, class: "site_title" do %>
+                                <%= link_to site.name, controller: "feed", action: "site", id: site.id %>
+                            <% end %>
+                            <%= content_tag :div, class: "site_article_unread_count" do %>
+                                <%= simple_format site.unread_num.to_s %>
+                            <% end %>
+                        </li>
+                    <% end %>
+                </ul>
+            </li>
+        <% end %>
+
+        <li>
+            <div class="sidebar_setting">
+                <%= link_to "settings", controller: "settings" , action: "setting" %>
+            </div>
+        </li>
+    </ul>
 </div>
 
 

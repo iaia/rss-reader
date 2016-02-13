@@ -1,0 +1,65 @@
+.sidebar {
+    width: 200px;
+    float: left;
+    background-color: #e0ffff;
+}
+
+.site {
+    width: 190px;
+}
+
+.site_title {
+    width: 170px;
+    float: left;
+    overflow: hidden;
+}
+.site_title a {
+    display: inline;
+    text-decoration: none;
+}
+.site_title a:link { color: #858585; }
+.site_title a:visited { color: #858585; }
+.site_title a:hover { color: #858585; }
+.site_title a:active { color: #858585; }
+
+
+.site_article_unread_count {
+    width: 10px;
+    float: right;
+}
+.site_article_unread_count p {
+    display: inline;
+}
+
+.collection {
+    width: 190px;
+    cursor: pointer;
+}
+.collection.open {
+}
+
+.collection_name {
+    width: 170px;
+    float: left;
+    color: #858585;
+    overflow: hidden;
+}
+.collection_unread_count {
+    width: 10px;
+    float: right;
+}
+.collection_unread_count p {
+    display: inline;
+}
+
+.sidebar_list {
+    list-style: none;
+    margin: 3px;
+    padding: 3px;
+}
+
+.sites {
+    list-style: none;
+    margin: 3px;
+    padding: 3px;
+}

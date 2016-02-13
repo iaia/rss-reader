@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Rss</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+    <head>
+        <title>Rss</title>
+        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+        <%= csrf_meta_tags %>
 
-<%= yield %>
+        <link rel="stylesheet" href="/css/feed.css" type="text/css" />
+        <link rel="stylesheet" href="/css/sidebar.css" type="text/css" />
+        <script type="text/javascript" src="/js/feed.js"></script>
+    </head>
+    <body>
 
-</body>
+        <%= yield %>
+
+    </body>
 </html>

@@ -3,11 +3,14 @@ class Site < ActiveRecord::Base
     belongs_to :user
     belongs_to :collection
 
+    attr_accessor :unread_num
+
     def self.add(user, url)
         rss = Feed.get(url)
         site_info, entries = Feed.read(rss)
 
-        site = user.sites.create(name: site_info["title"], url: site_info["url"], feed_url: url)
+        collection = user.collections.find_or_create_by(name: "uncategorized")
+        site = user.sites.create(name: site_info["title"], url: site_info["url"], feed_url: url, collection_id: collection.id)
     end
 
     def self.preview(url)

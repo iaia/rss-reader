@@ -20,7 +20,7 @@ class FeedController < ApplicationController
     end
 
     def site
-        @site = @sites.find(params[:id])
+        @site = Site.find(params[:id])
         @articles = @site.articles.where(read: false)
         render action: "index"
     end

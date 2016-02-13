@@ -67,3 +67,24 @@ function contentToggle(article){
     $(article).parent().children(".article_content").toggle();
     $(article).scrollTop($(article).position())
 }
+
+
+
+$(function(){
+    $("ul.sites").hide();
+    $("div.collection").click(function(){
+        $("ul.sites").slideUp();
+        $("div.collection").removeClass("open");
+        if($("+ul",this).css("display")=="none"){
+            $("+ul",this).slideDown();
+            $(this).addClass("open");
+        }
+    });
+
+    $("ul.sites li").mouseover(function(){
+        $(this).addClass("rollover");
+    }).mouseout(function(){
+        $(this).removeClass("rollover");
+    });
+});
+
