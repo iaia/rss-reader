@@ -14,26 +14,30 @@ class SettingsController < ApplicationController
         end
         file_path = params[:opml][:file_name].tempfile
         xml = File.open(file_path, &:read)
-        reader = ReadOpml::Reader.new(xml)
-        reader.read()
-        @collections = []
-        @sites = []
-        reader.category.each_pair do |category_name, tmp_sites|
-            collection = Collection.new(name: category_name)
-            @collections.push(collection)
-            tmp_sites.each do |tmp_site|
-                site = Site.new(
-                    name: tmp_site["title"],
-                    url: tmp_site["html_url"],
-                    feed_url: tmp_site["xml_url"],
-                    collection_id: collection.id
-                )
-                @sites.push(site)
-            end
-        end
+        @reader = ReadOpml::Reader.new(xml)
+        @reader.read()
     end
 
     def regist_opml
+        collections = params[:collection]
+        sites = params[:site]
+
+        collections.each_pair do |collection_id, value|
+            collection = Collection.create(name: value, user_id: @user.id)
+            sites.each_value do |site|
+                if site["collection_id"] == collection_id
+                    p "********************* koko"
+                    p site["xml_url"]
+                    begin
+                        rss = Feed.get(site["xml_url"])
+                    rescue
+                        next
+                    end
+                    site_info, entries = Feed.read(rss)
+                    Site.create(name: site["title"], url: site_info["url"], feed_url: site["xml_url"], collection_id: collection.id, user_id: @user.id)
+                end
+            end
+        end
         redirect_to :setting
     end
 

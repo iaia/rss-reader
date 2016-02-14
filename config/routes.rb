@@ -11,5 +11,6 @@ Rails.application.routes.draw do
     get 'setting/setting' => "settings#setting"
     get 'setting/import_opml' => "settings#import_opml"
     post 'setting/preview_opml' => "settings#preview_opml"
+    post 'setting/regist_opml' => "settings#regist_opml"
     get 'setting/regist_opml' => "settings#regist_opml"
 end

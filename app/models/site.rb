@@ -10,7 +10,7 @@ class Site < ActiveRecord::Base
         site_info, entries = Feed.read(rss)
 
         collection = user.collections.find_or_create_by(name: "uncategorized")
-        site = user.sites.create(name: site_info["title"], url: site_info["url"], feed_url: url, collection_id: collection.id)
+        site = user.sites.create(name: site_info["title"], url: site_info["url"], feed_url: url, collection_id: collection.id, )
     end
 
     def self.preview(url)
