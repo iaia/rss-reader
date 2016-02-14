@@ -21,7 +21,11 @@
                     <% end %>
 
                     <%= content_tag :div, class: "article_line_content" do %>
-                        <%= simple_format (article.content.lines[0])[0, str_limit] %>
+                        <% begin %>
+                            <%= simple_format (article.content.lines[0])[0, str_limit] %>
+                        <% rescue %>
+                            <%= simple_format "" %>
+                        <% end %>
                     <% end %>
                 </div>
 

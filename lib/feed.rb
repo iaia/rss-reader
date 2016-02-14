@@ -43,7 +43,11 @@ module Feed
             elsif rss.class.to_s == "RSS::Atom::Feed"
                 site["version"] = ""
                 site["title"] = rss.title.content
-                site["site_url"] = rss.links[2].href
+                begin
+                    site["site_url"] = rss.links[2].href
+                rescue
+                    site["site_url"] = rss.links[0].href
+                end
                 rss.entries.each do |_entry|
                     entry = Hash.new
                     entry["title"] = _entry.title.content
@@ -67,7 +71,9 @@ module Feed
 
         def show(rss)
             if rss.class.to_s == "RSS::Rss" and rss.rss_version == "2.0"
+                p "Rss2.0"
                 channel = rss.channel
+                p rss.rss_version
                 p channel.title.to_s
                 p channel.link.to_s
                 channel.items.each do |item|
@@ -75,11 +81,13 @@ module Feed
                     p item.link.to_s
                     p item.pubDate.to_s
                     p item.content_encoded.to_s
+                    p item.content_encoded.to_s
                 end
             elsif rss.class.to_s == "RSS::RDF" and rss.rss_version == "1.0"
+                p "RDF1.0"
                 channel = rss.channel
+                p rss.rss_version
                 p channel.title.to_s
-                p channel.about.to_s # feed_url
                 p channel.link.to_s
                 rss.items.each do |item|
                     p item.title.to_s
@@ -89,22 +97,22 @@ module Feed
                     p item.description.to_s
                 end
             elsif rss.class.to_s == "RSS::Atom::Feed"
+                p "Atom0"
                 p rss.title.content
-                p rss.links[0].href #feed_url
-                p rss.links[2].href
-                rss.entries.each do |entry|
-                    p entry.title.content
-                    p entry.links[-1].href
-                    p entry.content.content
-                    if entry.published.nil?
-                    else
-                        p entry.published.content
-                    end
+                begin
+                    p rss.links[2].href
+                rescue
+                    p rss.links[0].href
                 end
-            else
-                p rss.class.to_s 
+
+                rss.entries.each do |_entry|
+                    p _entry.title.content
+                    p _entry.links[-1].href
+                    p _entry.content.content
+                    p _entry.content.content
+                end
             end
-        end
+       end
     end
 end
 
@@ -112,5 +120,6 @@ end
 #url = "http://blog.livedoor.jp/nicovip2ch/atom.xml" # 壊れたatom atom10
 #url = "http://ie.u-ryukyu.ac.jp/news-ie/feed/" # rss2.0 rss20
 #url = "http://feeds.feedburner.com/mactegaki?format=xml" # RDF1.0
+#url = "http://simanman.hatenablog.com/feed"
 #rss = Feed.get(url)
-#site_info, entries = Feed.read(rss)
+#Feed.show(rss)

@@ -10,7 +10,7 @@ class SettingsController < ApplicationController
     def preview_opml
         # file_nameチェック .opml
         if File.extname(params[:opml][:file_name].original_filename) != ".opml"
-            redirect_to :import_opml #, text: "opmlをuploadしてください"
+            redirect_to action: "import_opml" #, text: "opmlをuploadしてください"
         end
         file_path = params[:opml][:file_name].tempfile
         xml = File.open(file_path, &:read)
@@ -23,22 +23,20 @@ class SettingsController < ApplicationController
         sites = params[:site]
 
         collections.each_pair do |collection_id, value|
-            collection = Collection.create(name: value, user_id: @user.id)
+            collection = @user.collections.find_or_create_by(name: value)
             sites.each_value do |site|
                 if site["collection_id"] == collection_id
-                    p "********************* koko"
-                    p site["xml_url"]
                     begin
                         rss = Feed.get(site["xml_url"])
                     rescue
                         next
                     end
                     site_info, entries = Feed.read(rss)
-                    Site.create(name: site["title"], url: site_info["url"], feed_url: site["xml_url"], collection_id: collection.id, user_id: @user.id)
+                    collection.sites.find_or_create_by(name: site["title"], url: site_info["url"], feed_url: site["xml_url"])
                 end
             end
         end
-        redirect_to :setting
+        redirect_to action: "setting"
     end
 
 end

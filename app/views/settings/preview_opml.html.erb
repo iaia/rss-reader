@@ -12,7 +12,6 @@
                         <%= content_tag :div, class: "opml_collection" do %>
                             <%= collection_name %><br />
                             <%= hidden_field_tag "collection[#{collection_id}]", collection_name %>
-                                    <% collection_id += 1 %>
                         <% end %>
                         <%= content_tag :div, class: "opml_sites" do %>
                             <% sites.each do |site| %>
@@ -26,6 +25,7 @@
                             <% end %>
                         <% end %>
                     <% end %>
+                    <% collection_id += 1 %>
                     <br />
                 <% end %>
             </div>
