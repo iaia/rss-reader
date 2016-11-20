@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<opml version="1.0">
+    <head>
+        <title>Hiroshi subscriptions in feedly Cloud</title>
+    </head>
+    <body>
+        <outline text="Blog" title="Blog">
+            <outline type="rss" text="名称未設定のブログ" title="名称未設定のブログ" xmlUrl="http://iaiaie.blogspot.com/feeds/posts/default" htmlUrl="http://iaiaie.blogspot.com/"/>
+            <outline type="rss" text="Seeker's eye" title="Seeker's eye" xmlUrl="http://seeker-s-eye.blogspot.com/feeds/posts/default" htmlUrl="http://seeker-s-eye.blogspot.com/"/>
+            <outline type="rss" text="パズルピースがこんなとこ" title="パズルピースがこんなとこ" xmlUrl="http://monomichi88.blog95.fc2.com/?xml" htmlUrl="http://monomichi88.blog95.fc2.com/"/>
+            <outline type="rss" text="AtlusNet RSS" title="AtlusNet RSS" xmlUrl="http://www.atlusnet.jp/information/rss/" htmlUrl="http://www.atlusnet.jp/"/>
+            <outline type="rss" text="ジャンパーズホームページ 日記" title="ジャンパーズホームページ 日記" xmlUrl="http://gomatare.wordpress.com/feed/" htmlUrl="https://gomatare.wordpress.com"/>
+            <outline type="rss" text="NAL's blog @ 琉球大学情報工学科" title="NAL's blog @ 琉球大学情報工学科" xmlUrl="http://ie.u-ryukyu.ac.jp/tnal/feed" htmlUrl="http://ie.u-ryukyu.ac.jp/tnal"/>
+            <outline type="rss" text="麦汁三昧" title="麦汁三昧" xmlUrl="http://mugijiru.seesaa.net/index20.rdf" htmlUrl="http://mugijiru.seesaa.net/"/>
+            <outline type="rss" text="simanmanのブログ" title="simanmanのブログ" xmlUrl="http://simanman.hatenablog.com/feed" htmlUrl="http://simanman.hatenablog.com/"/>
+            <outline type="rss" text="アリスソフトBlog" title="アリスソフトBlog" xmlUrl="http://blog.alicesoft.com/atom.xml" htmlUrl="http://blog.alicesoft.com/"/>
+            <outline type="rss" text="追い詰められた実績トロフィー追い人" title="追い詰められた実績トロフィー追い人" xmlUrl="http://blog.livedoor.jp/togurotogenkai/index.rdf" htmlUrl="http://blog.livedoor.jp/togurotogenkai/"/>
+            <outline type="rss" text="ひとりよがり日記" title="ひとりよがり日記" xmlUrl="http://moon.ap.teacup.com/qwertyuiop/rss.xml" htmlUrl="http://moon.ap.teacup.com/qwertyuiop/"/>
+            <outline type="rss" text="純粋関数型魔境" title="純粋関数型魔境" xmlUrl="http://amothic.hatenablog.jp/feed" htmlUrl="http://amothic.hatenablog.jp/"/>
+            <outline type="rss" text="しあわせさがせ？" title="しあわせさがせ？" xmlUrl="http://d.hatena.ne.jp/nakarx/rss" htmlUrl="http://d.hatena.ne.jp/nakarx/"/>
+        </outline>
+        <outline text="matome" title="matome">
+            <outline type="rss" text="アキバBlog（秋葉原ブログ）" title="アキバBlog（秋葉原ブログ）" xmlUrl="http://blog.livedoor.jp/geek/index.rdf" htmlUrl="http://blog.livedoor.jp/geek/"/>
+            <outline type="rss" text="やらおん！" title="やらおん！" xmlUrl="http://yaraon-blog.com/feed" htmlUrl="http://yaraon-blog.com"/>
+            <outline type="rss" text="2chコピペ保存道場" title="2chコピペ保存道場" xmlUrl="http://2chcopipe.com/index.rdf" htmlUrl="http://2chcopipe.com/"/>
+            <outline type="rss" text="【2ch】ニュー速VIPブログ(`･ω･´)" title="【2ch】ニュー速VIPブログ(`･ω･´)" xmlUrl="http://blog.livedoor.jp/insidears/index.rdf" htmlUrl="http://blog.livedoor.jp/insidears/"/>
+            <outline type="rss" text="無題のドキュメント" title="無題のドキュメント" xmlUrl="http://www.mudainodocument.com/index.rdf" htmlUrl="http://www.mudainodocument.com/"/>
+            <outline type="rss" text="やらおん！" title="やらおん！" xmlUrl="http://yaraon.blog109.fc2.com/?xml" htmlUrl="http://yaraon.blog109.fc2.com/"/>
+            <outline type="rss" text="ニコニコVIP2ch" title="ニコニコVIP2ch" xmlUrl="http://blog.livedoor.jp/nicovip2ch/atom.xml" htmlUrl="http://blog.livedoor.jp/nicovip2ch/"/>
+            <outline type="rss" text="なんＪチャレンジ｜2ch" title="なんＪチャレンジ｜2ch" xmlUrl="http://blog.livedoor.jp/tangomin/index.rdf" htmlUrl="http://blog.livedoor.jp/tangomin/"/>
+            <outline type="rss" text="オレ的ゲーム速報＠刃" title="オレ的ゲーム速報＠刃" xmlUrl="http://jin115.com/index.rdf" htmlUrl="http://jin115.com/"/>
+            <outline type="rss" text="IT速報" title="IT速報" xmlUrl="http://blog.livedoor.jp/itsoku/index.rdf" htmlUrl="http://blog.livedoor.jp/itsoku/"/>
+            <outline type="rss" text="くまニュース" title="くまニュース" xmlUrl="http://blog.livedoor.jp/qmanews/index.rdf" htmlUrl="http://blog.livedoor.jp/qmanews/"/>
+        </outline>
+        <outline text="エロゲ" title="エロゲ">
+            <outline type="rss" text="あんりずむ" title="あんりずむ" xmlUrl="http://blog.livedoor.jp/anrism/index.rdf" htmlUrl="http://blog.livedoor.jp/anrism/"/>
+        </outline>
+        <outline type="rss" text="Macの手書き説明書" title="Macの手書き説明書" xmlUrl="http://veadardiary.blog29.fc2.com/?xml" htmlUrl="http://veadardiary.blog29.fc2.com/"/>
+        <outline type="rss" text="Netnews on news.ie.u-ryukyu.ac.jp" title="Netnews on news.ie.u-ryukyu.ac.jp" xmlUrl="http://ie.u-ryukyu.ac.jp/news-ie/feed/" htmlUrl="http://ie.u-ryukyu.ac.jp/news-ie"/>
+        <outline type="rss" text="Vim-users.jp" title="Vim-users.jp" xmlUrl="http://vim-users.jp/feed/" htmlUrl="http://vim-users.jp"/>
+        <outline type="rss" text="きんどるどうでしょう" title="きんどるどうでしょう" xmlUrl="http://kindou.info/feed" htmlUrl="http://kindou.info"/>
+    </body>
+</opml>
