@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
         @collections.each do |collection|
             unread_num = 0
             collection.sites.each do |site|
-                site.update_site_articles()
+                #site.update_site_articles()
                 site.unread_num = site.articles.where(read: false).count.to_i
                 unread_num += site.unread_num.to_i
             end
@@ -18,6 +18,7 @@ class ApplicationController < ActionController::Base
         end
         @articles = Article.where(read: false).order(published: :desc)
         @all_articles_count = @articles.count.to_s
+        @articles = @articles.limit(20)
     end
 end
 
