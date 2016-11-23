@@ -10,7 +10,7 @@ describe "ReadOpmlTest" do
 
     describe "read opml" do
         before do
-       end
+        end
         it "open opml" do
             expect(@reader.xml).to_not be_nil
         end
@@ -28,16 +28,5 @@ describe "ReadOpmlTest" do
             @reader.get_rss
             expect(@reader.rss.length).to eq 29
         end
-
-#        it "read" do
-#            categories = @reader.read
-#            #            categories.each_pair do |category, sites|
-#            #                #p category
-#            #                sites.each do |site|
-#            #                    #p "site_title: " + site["title"] + ", html_url:" + site["html_url"] + ", xml_url" + site["xml_url"]
-#            #                end
-#            #            end
-#            expect(true).to be true
-#        end
     end
 end

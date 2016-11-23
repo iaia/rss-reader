@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-module RSS
+module MyRSS
     class RSS
         attr_accessor :title, :html_url, :xml_url, :category
         def initialize(title, html_url, xml_url, category = "uncategorized")

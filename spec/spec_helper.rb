@@ -18,8 +18,8 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 
-$LOAD_PATH.unshift File.expand_path('../lib/', __FILE__)
-require 'read_opml'
+$LOAD_PATH.unshift File.expand_path('../../lib/', __FILE__)
+$LOAD_PATH.unshift File.expand_path('../../lib/feed_reader/', __FILE__)
 
 RSpec.configure do |config|
     config.run_all_when_everything_filtered = true

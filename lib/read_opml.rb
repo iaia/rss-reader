@@ -1,11 +1,11 @@
 # encoding: utf-8
 require 'oga'
-require "rss"
+require "my_rss"
 
 module ReadOpml
     class Reader
         attr_reader :xml, :category, :rss
-        include RSS
+        include MyRSS
 
         def initialize(filepath)
             @category = []
