@@ -7,6 +7,7 @@ class Site < ActiveRecord::Base
 
     def self.add(user, url)
         reader = Feed::Feed.read(url)
+        return if reader.nil?
 
         collection = user.collections.find_or_create_by(name: "uncategorized")
         site = user.sites.create(name: reader.site_feed.title, url: reader.site_feed.url, feed_url: url, collection_id: collection.id, )
@@ -14,12 +15,14 @@ class Site < ActiveRecord::Base
 
     def self.preview(url)
         reader = Feed::Feed.read(url)
+        return if reader.nil?
 
         Site.new(name: reader.site_feed.title, url: reader.site_feed.url, feed_url: url)
     end
 
     def update_site_articles
         reader = Feed::Feed.read(self.feed_url)
+        return if reader.nil?
         reader.site_feed.articles.each do |article_feed|
             article = Article.find_or_create_by(
                 url: article_feed.url,

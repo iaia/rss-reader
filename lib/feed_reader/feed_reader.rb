@@ -1,6 +1,7 @@
 # encoding: utf-8
 require "rss"
 require "feed/feed"
+require "feed/site_feed"
 
 require "feed_reader/rss2"
 require "feed_reader/rdf1"
@@ -10,16 +11,24 @@ module FeedReader
     class Reader
         attr_accessor :site_feed
         def initialize(url)
-            @rss = RSS::Parser.parse(url, false)
-            @site_feed = Feed::SiteFeed.new
-            read
+            begin
+                @rss = RSS::Parser.parse(url, false)
+            rescue
+                return
+            end
+        end
+
+        def could_read?
+            return false if @rss.nil?
+            true
         end
 
         def self.read(url)
             reader = self.new(url)
+            return if reader.nil?
+            return if not reader.could_read?
             site, articles = reader.read
-            reader.site_feed.set_articles(articles)
-            reader.site_feed.set_site(site)
+            reader.site_feed = Feed::SiteFeed.new(site, articles)
             reader
         end
 
@@ -30,6 +39,9 @@ module FeedReader
                 RDF1.read(@rss)
             elsif @rss.class == RSS::Atom::Feed
                 Atom.read(@rss)
+            else
+                p "*********** other rss"
+                Other.read(@rss)
             end
         end
     end

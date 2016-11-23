@@ -2,10 +2,9 @@ class Article < ActiveRecord::Base
     belongs_to :site
 
     def self.preview(feed_url)
-        if feed_url.blank?
-            return 
-        end
+        return if feed_url.blank?
         reader = Feed::Feed.read(feed_url)
+        return if reader.nil?
 
         reader.site_feed.articles.map do |article|
             Article.new(

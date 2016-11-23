@@ -2,7 +2,7 @@
 require 'rss'
 require "feed_reader/feed_reader"
 require "feed/site_feed"
-require "feed/articles_feed"
+require "feed/article_feed"
 
 module Feed
     class Feed
