@@ -1,6 +1,7 @@
 class Site < ActiveRecord::Base
     has_many :articles
-    belongs_to :user
+    has_many :site_users
+    has_many :users, :through => :site_users
     belongs_to :collection
 
     attr_accessor :unread_num

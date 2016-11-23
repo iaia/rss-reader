@@ -1,5 +1,7 @@
 class Article < ActiveRecord::Base
     belongs_to :site
+    has_many :article_users
+    has_many :users, :through => :article_users
 
     def self.preview(feed_url)
         return if feed_url.blank?
