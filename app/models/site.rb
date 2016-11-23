@@ -6,33 +6,29 @@ class Site < ActiveRecord::Base
     attr_accessor :unread_num
 
     def self.add(user, url)
-        rss = Feed.get(url)
-        site_info, entries = Feed.read(rss)
+        reader = Feed::Feed.read(url)
 
         collection = user.collections.find_or_create_by(name: "uncategorized")
-        site = user.sites.create(name: site_info["title"], url: site_info["url"], feed_url: url, collection_id: collection.id, )
+        site = user.sites.create(name: reader.site_feed.title, url: reader.site_feed.url, feed_url: url, collection_id: collection.id, )
     end
 
     def self.preview(url)
-        rss = Feed.get(url)
-        site_info, entries = Feed.read(rss)
+        reader = Feed::Feed.read(url)
 
-        site = Site.new(name: site_info["title"], url: site_info["url"], feed_url: url)
-        return site
+        Site.new(name: reader.site_feed.title, url: reader.site_feed.url, feed_url: url)
     end
 
     def update_site_articles
-        rss = Feed.get(self.feed_url)
-        site_info, entries = Feed.read(rss)
-        entries.each do |entry|
+        reader = Feed::Feed.read(self.feed_url)
+        reader.site_feed.articles.each do |article_feed|
             article = Article.find_or_create_by(
-                url: entry["url"],
+                url: article_feed.url,
                 site_id: self.id
             ) do |_article|
-                _article.title = entry["title"]
-                _article.published = entry["published_time"]
-                _article.description = entry["description"]
-                _article.content = entry["content"]
+                _article.title = article_feed.title
+                _article.published = article_feed.published_time
+                _article.description = article_feed.description
+                _article.content = article_feed.content
                 _article.save
             end
         end

@@ -5,4 +5,9 @@ require "feed/site_feed"
 require "feed/articles_feed"
 
 module Feed
+    class Feed
+        def self.read(url)
+            FeedReader::Reader.read(url)
+        end
+    end
 end

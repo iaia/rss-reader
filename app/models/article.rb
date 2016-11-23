@@ -5,19 +5,16 @@ class Article < ActiveRecord::Base
         if feed_url.blank?
             return 
         end
-        rss = Feed.get(feed_url)
-        site_info, entries = Feed.read(rss)
-        articles = Array.new
-        entries.each do |entry|
-            article = Article.new(
-                title: entry["title"],
-                url: entry["url"],
-                published: entry["published_time"],
-                description: entry["description"],
-                content: entry["content"]
+        reader = Feed::Feed.read(feed_url)
+
+        reader.site_feed.articles.map do |article|
+            Article.new(
+                title: article.title,
+                url: article.url,
+                published: article.published_time,
+                description: article.description,
+                content: article.content
             )
-            articles << article
         end
-        return articles
     end
 end
