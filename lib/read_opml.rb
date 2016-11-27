@@ -4,12 +4,11 @@ require "my_rss"
 
 module ReadOpml
     class Reader
-        attr_reader :xml, :category, :rss
+        attr_reader :xml, :category
         include MyRSS
 
         def initialize(filepath)
-            @category = []
-            @rss = []
+            @category = Hash.new
             @xml = File.open(filepath, &:read)
         end
 
@@ -20,9 +19,9 @@ module ReadOpml
         end
 
         def read
-            get_category
             get_rss
         end
+
         def get_category 
             # type=rssで無いものはカテゴリ
             @category = get_outlines_under_body().map do |outline| # node
@@ -34,9 +33,10 @@ module ReadOpml
         def get_rss
             # type=rssがrss
             # 親がいればカテゴリ
+            @category["uncategorized"] = []
             get_outlines_under_body().each do |outline|
                 if outline.attribute("type")
-                    @rss << make_rss_object(outline) if outline.attribute("type").value == "rss"
+                    @category["uncategorized"] << make_rss_object(outline) if outline.attribute("type").value == "rss"
                 else
                     get_rss_under_category(outline, outline.attribute("text").value)
                 end
@@ -44,11 +44,13 @@ module ReadOpml
         end
 
         def get_rss_under_category(category_node, category)
-            category_node.children.each do |node|
+            category_name = category_node.attribute("title").value
+            @category[category_name] = category_node.children.map do |node|
                 next if node.class != Oga::XML::Element
                 next if node.attribute("type").nil?
-                @rss << make_rss_object(node, category) if node.attribute("type").value == "rss"
+                make_rss_object(node, category) if node.attribute("type").value == "rss"
             end
+            @category[category_name].compact!
         end
 
         def get_outlines_under_body

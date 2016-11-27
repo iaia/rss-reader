@@ -2,16 +2,19 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
 
     def auth
-        debugger
         if session[:user_id].nil?
             redirect_to controller: "users", action: "login"
         else
-            @user = User.find(session[:user_id])
-            @collections = @user.collections
+            begin
+                @user = User.find(session[:user_id])
+            rescue
+                redirect_to controller: "users", action: "login"
+            end
         end
     end
 
     def update_articles
+        @collections = @user.collections
         read_articles = @user.articles
         @collections.each do |collection|
             unread_num = 0
@@ -24,7 +27,10 @@ class ApplicationController < ActionController::Base
             end
             collection.unread_num = unread_num
         end
-        @articles = Article.where.not(id: read_articles.id).order(published: :desc)
+        read_article_ids = read_articles.map do |read_article|
+            read_article.id
+        end
+        @articles = Article.where.not(id: read_article_ids).order(published: :desc)
         @all_articles_count = @articles.count.to_i
         @articles = @articles.limit(20)
     end

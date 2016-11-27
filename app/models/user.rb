@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
     has_many :collections
     has_many :site_users
     has_many :sites, :through => :site_users
+    has_many :article_users
     has_many :articles, :through => :article_users
     def self.find_for_google_oauth2(auth)
         user = User.where(email: auth.info.email).first

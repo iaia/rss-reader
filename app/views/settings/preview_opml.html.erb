@@ -16,9 +16,9 @@
                         <%= content_tag :div, class: "opml_sites" do %>
                             <% sites.each do |site| %>
                                 <%= content_tag :div, class: "opml_site" do %>
-                                    <%= link_to site["title"], site["html_url"] %><br />
-                                    <%= hidden_field_tag "site[#{site_id}][title]", site["title"] %>
-                                    <%= hidden_field_tag "site[#{site_id}][xml_url]", site["xml_url"] %>
+                                    <%= link_to site.title, site.html_url %><br />
+                                    <%= hidden_field_tag "site[#{site_id}][title]", site.title %>
+                                    <%= hidden_field_tag "site[#{site_id}][xml_url]", site.html_url %>
                                     <%= hidden_field_tag "site[#{site_id}][collection_id]", collection_id %>
                                     <% site_id += 1 %>
                                 <% end %>

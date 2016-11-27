@@ -13,8 +13,7 @@ class SettingsController < ApplicationController
             redirect_to action: "import_opml" #, text: "opmlをuploadしてください"
         end
         file_path = params[:opml][:file_name].tempfile
-        xml = File.open(file_path, &:read)
-        @reader = ReadOpml::Reader.new(xml)
+        @reader = ReadOpml::Reader.new(file_path)
         @reader.read()
     end
 
@@ -27,12 +26,12 @@ class SettingsController < ApplicationController
             sites.each_value do |site|
                 if site["collection_id"] == collection_id
                     begin
-                        rss = Feed.get(site["xml_url"])
+                        reader = Feed::Feed.read(site["xml_url"])
                     rescue
                         next
                     end
-                    site_info, entries = Feed.read(rss)
-                    collection.sites.find_or_create_by(name: site["title"], url: site_info["url"], feed_url: site["xml_url"])
+                    site = reader.site_feed
+                    collection.sites.find_or_create_by(name: site.title, url: site.url, feed_url: site.feed_url)
                 end
             end
         end

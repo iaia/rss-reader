@@ -28,7 +28,7 @@ module FeedReader
             return if reader.nil?
             return if not reader.could_read?
             site, articles = reader.read
-            reader.site_feed = Feed::SiteFeed.new(site, articles)
+            reader.site_feed = Feed::SiteFeed.new(url, site, articles)
             reader
         end
 

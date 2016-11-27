@@ -1,15 +1,17 @@
 # encoding: utf-8
 
 require "spec_helper"
+require "read_opml"
 
 describe "ReadOpmlTest" do
     before do
-        filepath = File.dirname(__FILE__) + "/feedly.opml"
-        @reader = ReadOpml::Reader.new(filepath)
     end
 
     describe "read opml" do
         before do
+            p "before"
+            filepath = File.dirname(__FILE__) + "/feedly.opml"
+            @reader = ReadOpml::Reader.new(filepath)
         end
         it "open opml" do
             expect(@reader.xml).to_not be_nil
@@ -26,7 +28,7 @@ describe "ReadOpmlTest" do
 
         it "get rss" do
             @reader.get_rss
-            expect(@reader.rss.length).to eq 29
+            expect(@reader.category["uncategorized"].length).to eq 4
         end
     end
 end

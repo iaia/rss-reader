@@ -3,8 +3,8 @@ require "feed/article_feed"
 
 module Feed
     class SiteFeed
-        attr_accessor :rss_type, :version, :url, :title, :articles
-        def initialize(site, articles)
+        attr_accessor :rss_type, :version, :url, :title, :articles, :feed_url
+        def initialize(url, site, articles)
             set_site(site)
             set_articles(articles)
         end

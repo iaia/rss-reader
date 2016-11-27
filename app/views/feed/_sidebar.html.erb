@@ -10,7 +10,7 @@
                 <%= link_to "All", {controller: "feed", action: "index"}, class: "site_title_link" %>
             <% end %>
             <%= content_tag :div, class: "site_article_unread_count" do %>
-                <%= simple_format @all_articles_count %>
+                <%= simple_format @all_articles_count.to_s %>
             <% end %>
         </li>
 
