@@ -1,0 +1,15 @@
+<%= connected = current_user.try(
+    :social_profile, provider
+)
+%>
+<div class="social-block">
+    <div class="df">
+        <div class="title">
+            <i class="<%= icon %> <%= provider %>"></i>
+            <h3><%= display_name %></h3>
+        </div>
+        <div class="body">
+            <%= button_tag("auth", class: "social-connect", onclick: "window.open('https://accounts.google.com/o/oauth2/auth?client_id=165701592801-510e16jgu50l6bqpqtf5o4quht3uvuvg.apps.googleusercontent.com&redirect_uri=http://localhost:3000/user/auth/google/callback&scope=https://www.googleapis.com/auth/gmail.readonly&response_type=code')") %>
+        </div>
+    </div>
+</div>

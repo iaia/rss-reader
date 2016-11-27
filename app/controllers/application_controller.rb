@@ -2,8 +2,13 @@ class ApplicationController < ActionController::Base
     protect_from_forgery with: :exception
 
     def auth
-        @user = User.find(1)
-        @collections = @user.collections
+        debugger
+        if session[:user_id].nil?
+            redirect_to controller: "users", action: "login"
+        else
+            @user = User.find(session[:user_id])
+            @collections = @user.collections
+        end
     end
 
     def update_articles

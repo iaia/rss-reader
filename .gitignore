@@ -12,3 +12,8 @@ tmp/
 vender
 
 lib/feedly.opml
+
+.byebug_history
+
+
+config/secrets.yml

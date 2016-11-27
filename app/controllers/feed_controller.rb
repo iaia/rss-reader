@@ -1,5 +1,4 @@
 class FeedController < ApplicationController
-    include Feed
     before_action :auth, :update_articles
 
     def index

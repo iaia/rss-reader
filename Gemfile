@@ -42,7 +42,10 @@ group :development, :test do
 end
 
 gem 'oga'
+
+gem "devise"
 gem 'omniauth'
+gem "omniauth-google-oauth2"
 
 group :development do
     # Access an IRB console on exception pages or by using <%= console %> in views
