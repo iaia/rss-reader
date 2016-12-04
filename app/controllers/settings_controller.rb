@@ -12,12 +12,12 @@ class SettingsController < ApplicationController
         if File.extname(params[:opml][:file_name].original_filename) != ".opml"
             redirect_to action: "import_opml" #, text: "opmlをuploadしてください"
         end
-        file_path = params[:opml][:file_name].tempfile
-        @reader = ReadOpml::Reader.new(file_path)
-        @reader.read()
+        @reader = ReadOpml::Reader.read(params[:opml][:file_name].tempfile)
     end
 
     def regist_opml
+        p "aaa"
+        @collection = params[:collection]
         collections = params[:collection]
         sites = params[:site]
 
@@ -26,16 +26,14 @@ class SettingsController < ApplicationController
             sites.each_value do |site|
                 if site["collection_id"] == collection_id
                     begin
-                        reader = Feed::Feed.read(site["xml_url"])
+                        site_feed = Feed::Feed.read(site["xml_url"])
                     rescue
                         next
                     end
-                    site = reader.site_feed
-                    collection.sites.find_or_create_by(name: site.title, url: site.url, feed_url: site.feed_url)
+                    collection.sites.find_or_create_by(name: site_feed.title, url: site_feed.url, feed_url: site_feed.feed_url)
                 end
             end
         end
-        redirect_to action: "setting"
+        #redirect_to action: "setting"
     end
-
 end

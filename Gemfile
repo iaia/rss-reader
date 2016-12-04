@@ -39,6 +39,7 @@ group :development, :test do
     gem 'byebug'
     gem "guard"
     gem "guard-rspec", require: false
+    gem "rubocop", require: false
 end
 
 gem 'oga'

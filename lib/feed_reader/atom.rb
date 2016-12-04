@@ -1,38 +1,44 @@
 # encoding: utf-8
+require "feed_reader/feed_xml"
 
 module FeedReader
-    class Atom
-        def self.read(rss)
-            site = get_site(rss)
+    class Atom < FeedXml
+        def self.read(rss, feed_url)
             articles = get_articles(rss.entries)
-            return site, articles
+            get_site(rss, articles, feed_url)
         end
-        def self.get_site(rss)
-            site = Hash.new()
-            site["type"] = RSS::Atom::Feed
-            site["version"] = ""
-            site["title"] = rss.title.content
-            begin
-                site["site_url"] = rss.links[2].href
-            rescue
-                site["site_url"] = rss.links[0].href
+
+        def self.get_site(rss, articles, feed_url)
+            super(type: RSS::Atom::Feed, version: "",
+                  feed_url: feed_url, url: get_site_url(rss.links),
+                  title: rss.title.content, articles: articles)
+        end
+
+        def self.get_site_url(links)
+            if links.length > 2
+                links[2].href
+            else
+                links[0].href
             end
-            site
         end
+
         def self.get_articles(entries)
             entries.map do |entry|
-                hentry = Hash.new
-                hentry["title"] = entry.title.content
-                hentry["url"] = entry.links[-1].href
-                if entry.published.nil?
-                    hentry["published_time"] = Time.now
-                else
-                    hentry["published_time"] = entry.published.content
-                end
-                hentry["content"] = entry.content.content
-                hentry["description"] = entry.content.content
-                hentry
+                super(title: entry.title.content, 
+                      url: entry.links[-1].href, 
+                      published_time: get_published_time(entry.published),
+                      description: entry.content.content,
+                      content: entry.content.content
+                     )
             end
         end
-    end
-end
+
+        def self.get_published_time(published)
+            if published.nil?
+                Time.now
+            else
+                published.content
+            end
+        end
+    end # class Atom
+end # module FeedReader

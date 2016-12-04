@@ -18,6 +18,7 @@
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 
 $LOAD_PATH.unshift File.expand_path('../../lib/', __FILE__)
+$LOAD_PATH.unshift File.expand_path('../../lib/opml/', __FILE__)
 $LOAD_PATH.unshift File.expand_path('../../lib/feed_reader/', __FILE__)
 
 RSpec.configure do |config|

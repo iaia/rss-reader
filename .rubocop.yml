@@ -1,0 +1,14 @@
+Style/IndentationWidth:
+    Width: 4
+        
+Style/StringLiterals:
+    EnforcedStyle: double_quotes
+
+Style/AndOr:
+    Enabled: false
+
+Style/Not:
+    Enabled: false
+
+Style/TrailingWhitespace:
+    Enabled: false
