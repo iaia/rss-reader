@@ -4,7 +4,7 @@ gem 'rails', '5.2.2'
 
 gem 'activesupport'
 gem 'sass-rails'
-gem 'sqlite3'
+gem 'mysql2'
 
 gem 'jbuilder', '~> 2.0'
 gem 'jquery-rails'
@@ -29,3 +29,4 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'opml_reader'
 gem 'uglifier', '>= 1.3.0'
+gem 'bootsnap', require: false
