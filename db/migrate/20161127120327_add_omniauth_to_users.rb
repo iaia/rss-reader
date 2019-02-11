@@ -1,4 +1,3 @@
 class AddOmniauthToUsers < ActiveRecord::Migration
-  def change
-  end
+  def change; end
 end
