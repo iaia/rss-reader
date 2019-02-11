@@ -62,6 +62,9 @@ AllCops:
     - 'vendor/**/*'
     - 'vender/**/*'
     - '.git/**/*'
+    - 'bin/**'
+    - 'db/**/*'
+    - 'test/**/*'
   # Default formatter will be used if no `-f/--format` option is given.
   DefaultFormatter: progress
   # Cop names are displayed in offense messages by default. Change behavior
@@ -1651,6 +1654,10 @@ Metrics/BlockLength:
     # By default, exclude the `#refine` method, as it tends to have larger
     # associated blocks.
     - refine
+  Exclude:
+    - 'spec/**/*'
+    - 'Guardfile'
+    - 'db/**/*'
 
 Metrics/BlockNesting:
   Description: 'Avoid excessive block nesting'
@@ -1683,7 +1690,7 @@ Metrics/LineLength:
   Enabled: true
   VersionAdded: '0.25'
   VersionChanged: '0.46'
-  Max: 80
+  Max: 120
   # To make it possible to copy or click on URIs in the code, we allow lines
   # containing a URI to be longer than Max.
   AllowHeredoc: true
@@ -1706,7 +1713,7 @@ Metrics/MethodLength:
   VersionAdded: '0.25'
   VersionChanged: '0.59.2'
   CountComments: false  # count full line comments?
-  Max: 10
+  Max: 16
   ExcludedMethods: []
 
 Metrics/ModuleLength:
@@ -2709,7 +2716,7 @@ Style/ArrayJoin:
 Style/AsciiComments:
   Description: 'Use only ascii symbols in comments.'
   StyleGuide: '#english-comments'
-  Enabled: true
+  Enabled: false
   VersionAdded: '0.9'
   VersionChanged: '0.52'
   AllowedChars: []
@@ -2979,7 +2986,7 @@ Style/CommentAnnotation:
 
 Style/CommentedKeyword:
   Description: 'Do not place comments on the same line as certain keywords.'
-  Enabled: true
+  Enabled: false
   VersionAdded: '0.51'
 
 Style/ConditionalAssignment:
@@ -3052,7 +3059,7 @@ Style/Dir:
 
 Style/Documentation:
   Description: 'Document classes and non-namespace modules.'
-  Enabled: true
+  Enabled: false
   VersionAdded: '0.9'
   Exclude:
     - 'spec/**/*'
